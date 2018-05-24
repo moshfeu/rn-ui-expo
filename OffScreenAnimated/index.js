@@ -5,7 +5,8 @@ export default class OffScreenAnimated extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      visible: false
+      visible: this.props.visible,
+      delta: 0
     }
   }
   componentWillMount() {
@@ -25,25 +26,41 @@ export default class OffScreenAnimated extends Component {
     });
   }
 
-  render() {
-    const { visible, style, children, ...rest } = this.props;
+  _onLayout = event => {
+    this.setState({delta: event.nativeEvent.layout.height});
+  }
 
-    const containerStyle = {
+  containerStyle() {
+    return {
       transform: [
         {
           translateY: this._visibility.interpolate({
             inputRange: [0, 1],
-            outputRange: [this.props.delta || 50, 0],
+            outputRange: [this.state.delta, 0],
           }),
         },
       ],
     };
+  }
 
-    const combinedStyle = [containerStyle, style];
+  render() {
+    const { style, children, ...rest } = this.props;
+    const { visible } = this.state;
+    const combinedStyle = [this.containerStyle(), style, styles.bottom];
     return (
-      <Animated.View pointerEvents={this.state.visible ? 'auto' : 'none'} style={combinedStyle} {...rest}>
+      <Animated.View onLayout={this._onLayout} pointerEvents={visible ? 'auto' : 'none'} style={combinedStyle} {...rest}>
         {children}
       </Animated.View>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  bottom: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    width: '100%',
+    backgroundColor: 'green'
+  }
+})
