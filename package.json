@@ -1,10 +1,11 @@
 {
   "name": "rn-ui-expo",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A React Native UI library for Expo",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "prepublish": "npm-auto-version",
+    "postpublish": "git push origin --tags"
   },
   "repository": {
     "type": "git",
@@ -25,5 +26,8 @@
     "react": "16.3.1",
     "react-native": "https://github.com/expo/react-native/archive/sdk-27.0.0.tar.gz"
   },
-  "homepage": "https://github.com/moshfeu/rn-ui-expo#readme"
+  "homepage": "https://github.com/moshfeu/rn-ui-expo#readme",
+  "devDependencies": {
+    "npm-auto-version": "^1.0.0"
+  }
 }
