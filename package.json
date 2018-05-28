@@ -5,6 +5,7 @@
   "main": "/dist/",
   "scripts": {
     "start": "tsc",
+    "npm-publish": "cp package.json ./dist && cd ./dist && npm publish && cd ..",
     "prepublish": "npm-auto-version",
     "postpublish": "git push origin --tags"
   },
