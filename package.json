@@ -1,9 +1,10 @@
 {
   "name": "rn-ui-expo",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "description": "A React Native UI library for Expo",
-  "main": "index.js",
+  "main": "/dist/",
   "scripts": {
+    "start": "tsc",
     "prepublish": "npm-auto-version",
     "postpublish": "git push origin --tags"
   },
@@ -28,6 +29,8 @@
   },
   "homepage": "https://github.com/moshfeu/rn-ui-expo#readme",
   "devDependencies": {
-    "npm-auto-version": "^1.0.0"
+    "npm-auto-version": "^1.0.0",
+    "@types/react": "^16.3.14",
+    "@types/react-native": "^0.55.16"
   }
 }

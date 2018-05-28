@@ -1,14 +1,28 @@
 import React, { Component } from 'react';
-import { Text, View, StyleSheet, Image, Animated } from 'react-native';
+import { Text, View, StyleSheet, Image, Animated, StyleProp, ViewStyle, LayoutChangeEvent } from 'react-native';
 
-export default class OffScreenAnimated extends Component {
-  constructor(props) {
+
+export interface IOffScreenAnimatedProps {
+  visible: boolean;
+  style?: StyleProp<ViewStyle>
+}
+
+export interface IOffScreenAnimatedState {
+  visible: boolean;
+  delta: number;
+}
+
+export default class OffScreenAnimated extends Component<IOffScreenAnimatedProps, IOffScreenAnimatedState> {
+  private _visibility: any;
+
+  constructor(props: IOffScreenAnimatedProps) {
     super(props);
     this.state = {
       visible: this.props.visible,
       delta: 0
     }
   }
+
   componentWillMount() {
     this._visibility = new Animated.Value(this.props.visible ? 1 : 0);
   }
@@ -26,11 +40,11 @@ export default class OffScreenAnimated extends Component {
     });
   }
 
-  _onLayout = event => {
+  private _onLayout = (event: LayoutChangeEvent) => {
     this.setState({delta: event.nativeEvent.layout.height});
   }
 
-  containerStyle() {
+  private containerStyle() {
     return {
       transform: [
         {
