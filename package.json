@@ -1,6 +1,6 @@
 {
   "name": "rn-ui-expo",
-  "version": "1.0.3",
+  "version": "1.0.6",
   "description": "A React Native UI library for Expo",
   "main": "/dist/",
   "scripts": {
